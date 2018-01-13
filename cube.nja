@@ -1,0 +1,29 @@
+{
+  "mainFile": "D:/Misc/old/Eclipse Workspace/CubeGui/Main.py", 
+  "use-tabs": false, 
+  "venv": "", 
+  "relatedProjects": [], 
+  "name": "cube", 
+  "license": "GNU General Public License v3", 
+  "url": "", 
+  "pythonPath": "D:/Programming/Py2.7.3/python.exe", 
+  "preExecScript": "", 
+  "additional_builtins": [], 
+  "programParams": "", 
+  "indentation": 4, 
+  "PYTHONPATH": "", 
+  "supported-extensions": [
+    ".py", 
+    ".html", 
+    ".jpg", 
+    ".png", 
+    ".ui", 
+    ".css", 
+    ".json", 
+    ".js", 
+    ".ini"
+  ], 
+  "project-type": "Import from sources", 
+  "postExecScript": "", 
+  "description": ""
+}
