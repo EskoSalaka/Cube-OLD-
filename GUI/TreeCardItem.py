@@ -18,7 +18,7 @@ class TreeCardItem(Card, QtGui.QTreeWidgetItem):
                       card.cost, card.type)
         QtGui.QTreeWidgetItem.__init__(self, card.name)
 
-        self.setText(0,unicode( card.name))
+        self.setText(0, unicode( card.name))
         
         self.setData(1, 1, manaSymbols)
         self.setText(1, '')

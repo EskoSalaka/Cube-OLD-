@@ -8,6 +8,8 @@ import codecs
 import os.path
 import ConfigParser
 
+from PyQt4.QtCore import QString
+
 from GUI.FilterButton import FilterButton, MultiColorFilterButton
 from GUI.CardImageWidget import CardImageWidget
 from GUI.QuickStatsCanvas import QuickStatsCanvas
@@ -32,26 +34,24 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
     def __init__(self):
         super(Ui_MainWindow, self).__init__()
-        
-        #self.setFrameStyle(QtGui.QFrame.Sunken | QtGui.QFrame.StyledPanel)
 
-        #------------------------------------
+        
         self._cardReader = FileHandler(self.getDatabase())
         self._config = ConfigParser.ConfigParser()
 
-        #------------------------------------
+        
         self._config.read('Settings\Settings.ini')
         self.setupUi(self)
         self.configure(currentDeckSaved='', currentDeckPath='')
         self._presetBasicLands()
 
-        #------------------------------------
+        
         self._config.read('Settings\Settings.ini')
         
 #==========================================================================#
 #                              Settings handling methods                   #
 #==========================================================================#
-#-------------------------------------------------------------------------------
+
     def configure(self, **kwargs):
         """Configures the settings file."""
 
@@ -61,7 +61,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         with open('Settings\Settings.ini', 'w') as settingsFile:
             self._config.write(settingsFile)
 
-#-------------------------------------------------------------------------------
+
     def getSetting(self, option):
         """
         Returns an option from the settings file under the [Config] section.
@@ -70,7 +70,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self._config.read('Settings\Settings.ini')
         return self._config.get('Config', option)
 
-#-------------------------------------------------------------------------------
+
     def getMwsSetCodes(self):
         """
         Returns The MWS set codes from the Settings.ini file.
@@ -88,7 +88,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #==========================================================================#
 #                              Database handling methods                   #
 #==========================================================================#
-#-------------------------------------------------------------------------------
+
     def getDatabase(self):
         """
         Unpickles and returns the Database instance.
@@ -96,7 +96,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         
         return pickle.load(open('Database\MasterBase.pick', 'rb'))
 
-#-------------------------------------------------------------------------------
+
     def saveDatabase(self, db):
         """
         Pickles the database back to a file located in the Database package.
@@ -110,7 +110,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #                              Public Editing Methods                      #
 #==========================================================================#
 
-#-------------------------------------------------------------------------------
+
     def saveDeckAs(self):
         """
         Save the deck/sideboard as an mwsdeck file and choose new settings.
@@ -119,7 +119,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.configure(currentDeckPath='', currentDeckSaved=False)
         self.saveDeck()
 
-#-------------------------------------------------------------------------------
+
     def saveDeck(self):
         """
         Save the deck/sideboard as an mwsdeck file with the same settings as 
@@ -147,7 +147,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                            lastSaveDeckLoc=os.path.dirname(str(path)))
 
 
-#-------------------------------------------------------------------------------
+
     def openMWSDeck(self):
         """
         Opens a deck from an mwsdeck file.
@@ -188,7 +188,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #                              Sealed deck creation                        #
 #==========================================================================#
 
-#-------------------------------------------------------------------------------
+
     def cubeSealedFromMWSDeckFile(self):
         """
         Creates a sealed deck from a cube in an MWSDeck file. Cards are ignored
@@ -219,7 +219,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             else:
                 self._MWSfileOpenErrorDialog()
 
-#-------------------------------------------------------------------------------
+
     def cubeSealedFromCubeFile(self):
         """
         Creates a sealed deck from a cube in an MWSDeck file
@@ -245,7 +245,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 self.cardsToLists(sealedPool, [])
                 self.configure(lastOpenCubeLoc=os.path.dirname(str(path)))
 
-#-------------------------------------------------------------------------------
+
     def cubeSealedFromTextFile(self):
         """
         Creates a sealed deck from a cube in an MWSDeck file
@@ -289,7 +289,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #                              Other Public  methods                       #
 #==========================================================================#
 
-#-------------------------------------------------------------------------------
+
     def basicLandCount(self):
         """
         Returns the number of basic lands in the deck. Counts the numbers in
@@ -299,7 +299,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                self.swampSpinBox.value() + self.plainsSpinBox.value() + \
                self.islandSpinBox.value()
 
-#-------------------------------------------------------------------------------
+
     def currentDeckEmpty(self):
         """
         Checks if the deck/sideboard is empty and displays a warning if it is
@@ -308,7 +308,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         
         return not (self.sideBoardList.cardCount() + self.deckList.cardCount())
 
-#-------------------------------------------------------------------------------
+
     def currentDeckUnsaved(self):
         """
         Checks if the deck/sideboard is saved.
@@ -319,7 +319,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         else:
             return not self.getSetting('currentDeckSaved')
         
-#-------------------------------------------------------------------------------
+
     def transferCardItem(self, cardItem, sender):
         """
         Transfers a CardItem from a list to another.
@@ -343,7 +343,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             
         self.refreshNumbers()
         
-#-------------------------------------------------------------------------------
+
     def switchCardItem(self, newCard, oldCard, sender):
         """
         Transfers a CardItem from a list to another.
@@ -357,7 +357,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 self.statsWidget.removeCardData(oldCard)
                 self.statsWidget.addCardData(newCard)
 
-#-------------------------------------------------------------------------------
+
     def transferCardItems(self, cardItems, sender):
         """
         Transfers multiple CardItems from a list to another.
@@ -389,7 +389,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             
         self.refreshNumbers()
         
-#-------------------------------------------------------------------------------
+
     def cardsToLists(self, sideBoardCards, deckCards):
         """
         Transfers given cards to the lists.
@@ -410,7 +410,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
 
 
-#-------------------------------------------------------------------------------
+
     def refreshNumbers(self):
         """
         Sets the correct values for the numbers of cards seen on the titles
@@ -425,7 +425,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.basicLandsBox.setTitle('Basic lands({num})'.format(num=basicLands))
         self.configure(currentDeckSaved='')
 
-#-------------------------------------------------------------------------------
+
     def clearAll(self):
         """
         Clears all the cards from each list, and clears the data from
@@ -441,7 +441,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.configure(currentDeckPath='')
         self.statsWidget.Update()
 
-#-------------------------------------------------------------------------------
+
     def openCubeEditor(self):
         """
         Opends the cube editor window.
@@ -454,7 +454,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         cards = db.getAllCards()
         cubeEditor.masterBaseList.addCards(cards, progressDialog=None)
         
-#-------------------------------------------------------------------------------
+
     def SwitchFocusedCardList(self):
         """
         Switches the focus of the current CardList to the other.
@@ -471,7 +471,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         
         
 
-#-------------------------------------------------------------------------------
+
     def _presetBasicLands(self):
         """
         Searches the settings defined basic lands from the database beforehand
@@ -486,7 +486,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self._mountain = db.getCard(self.getSetting('Mountain'))
         self._island = db.getCard(self.getSetting('Island'))
 
-#-------------------------------------------------------------------------------
+
     def _setBacground(self, imagePath):
         """
         """
@@ -507,7 +507,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         #elf.centralWidget().setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         #self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
-#-------------------------------------------------------------------------------
+
     def _set(self):
         """
         """
@@ -515,7 +515,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #                              Event handling                              #
 #==========================================================================#
 
-#-------------------------------------------------------------------------------
+
     def closeEvent(self, event):
         """
         Close event handler.
@@ -534,7 +534,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         else:
             event.accept()
             
-#-------------------------------------------------------------------------------
+
     def keyPressEvent(self, event):
         """Keyboard event handler"""
         print event
@@ -542,7 +542,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
             print self.focusWidget(), 1
             
 
-#-------------------------------------------------------------------------------
+
     def _onMountainSpinBoxValueChanged(self, newVal):
         """
         Event handler for the MountainSpinBox valuechange.
@@ -568,7 +568,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         if self.getSetting('autoUpdateStatsWidget'):
             self.statsWidget.Update()
 
-#-------------------------------------------------------------------------------
+
     def _onPlainsSpinBoxValueChanged(self, newVal):
         """
         Event handler for the plainsSpinBox valuechange.
@@ -594,7 +594,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         if self.getSetting('autoUpdateStatsWidget'):
             self.statsWidget.Update()
 
-#-------------------------------------------------------------------------------
+
     def _onIslandSpinBoxValueChanged(self, newVal):
         """
         Event handler for the islandSpinBox valuechange.
@@ -619,7 +619,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         if self.getSetting('autoUpdateStatsWidget'):
             self.statsWidget.Update()
 
-#-------------------------------------------------------------------------------
+
     def _onSwampSpinBoxValueChanged(self, newVal):
         """
         Event handler for the swampSpinBox valuechange.
@@ -645,7 +645,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         if self.getSetting('autoUpdateStatsWidget'):
             self.statsWidget.Update()
 
-#-------------------------------------------------------------------------------
+
     def _onForestSpinBoxValueChanged(self, newVal):
         """
         Event handler for the forestSpinBox valuechange.
@@ -677,7 +677,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #                              QT dialogs                                  #
 #==========================================================================#
 
-#-------------------------------------------------------------------------------
+
     def _saveDeckClosingWarning(self):
         """Warning displayed when trying to close the current unsaved deck."""
 
@@ -689,7 +689,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                                           QtGui.QMessageBox.Cancel)
 
 
-#-------------------------------------------------------------------------------
+
     def _saveCubeQuestionDialog(self):
         """
         A question dialog displayed when the user is opted to save the
@@ -702,7 +702,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                                           QtGui.QMessageBox.Ok,
                                           QtGui.QMessageBox.Cancel)
 
-#-------------------------------------------------------------------------------
+
     def _saveCubeDialog(self):
         """A save cube dialog. Returns path where the cube is to be saved."""
 
@@ -715,7 +715,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                                                    directory=loc)
 
 
-#-------------------------------------------------------------------------------
+
     def _saveMWSDeckFileDialog(self):
         """A save mws deck dialog. Returns saved deck path.."""
 
@@ -727,7 +727,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                                                    filter=fileFilter,
                                                    directory=loc)
 
-#-------------------------------------------------------------------------------
+
     def _saveOrganizedCubeTxtFile(self):
         """A save organized cube text file dialog. Returns saved file path.."""
 
@@ -740,7 +740,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                                                    directory=loc)
 
 
-#-------------------------------------------------------------------------------
+
     def _openMWSDeckDialog(self):
         """A path dialog for opening mws decks."""
 
@@ -749,7 +749,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         return QtGui.QFileDialog.getOpenFileName(parent=None, caption=caption,
                                                  directory=loc)
 
-#-------------------------------------------------------------------------------
+
     def _openCubeFileDialog(self):
         """A path dialog for opening .cube decks."""
 
@@ -758,7 +758,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         return QtGui.QFileDialog.getOpenFileName(parent=None, caption=caption,
                                                  directory=loc)
 
-#-------------------------------------------------------------------------------
+
     def _openTxtFileDialog(self):
         """A path dialog for opening .txt decks."""
 
@@ -767,7 +767,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         return QtGui.QFileDialog.getOpenFileName(parent=None, caption=caption,
                                                  directory=loc)
 
-#-------------------------------------------------------------------------------
+
     def _MWSfileOpenErrorDialog(self):
         """
         An error dialog displayed when something went wrong with
@@ -778,7 +778,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         msg = "Specified file contains no card data or is corrupted"
         QtGui.QMessageBox.warning(self, title, msg)
 
-#-------------------------------------------------------------------------------
+
     def _txtFileOpenErrorDialog(self):
         """
         An error dialog displayed when something went wrong with
@@ -789,7 +789,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         msg = "Specified file contains no card data or is corrupted"
         QtGui.QMessageBox.warning(self, title, msg)
 
-#-------------------------------------------------------------------------------
+
     def _cubeFileOpenErrorDialog(self):
         """
         An error dialog displayed when something went wrong with
@@ -800,7 +800,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         msg = "Specified file contains no cube data or is corrupted"
         QtGui.QMessageBox.warning(self, title, msg)
 
-#-------------------------------------------------------------------------------
+
     def _errorsInTxtFileDialog(self, cards):
         """
         An error dialog displayed when errors are found in scanning a txt file
@@ -821,7 +821,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 #==========================================================================#
 #                             Generated                                    #
 #==========================================================================#
-#-------------------------------------------------------------------------------
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1156, 915)
@@ -1047,7 +1047,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.plainsSpinBox.valueChanged.connect(self._onPlainsSpinBoxValueChanged)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("Cube", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.basicLandsBox.setTitle(QtGui.QApplication.translate("MainWindow", "Basic Lands(0)", None, QtGui.QApplication.UnicodeUTF8))
         self.plainsLabel.setText(QtGui.QApplication.translate("MainWindow", "Plains", None, QtGui.QApplication.UnicodeUTF8))
         self.swampLabel.setText(QtGui.QApplication.translate("MainWindow", "Swamp", None, QtGui.QApplication.UnicodeUTF8))

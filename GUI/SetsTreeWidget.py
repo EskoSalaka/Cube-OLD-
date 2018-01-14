@@ -202,7 +202,7 @@ class SetsTreeWidget(QtGui.QTreeWidget):
         Checks all the mtg sets belonging to the 'Specials&Other'.
         """
         
-        specials = self._topLevelItems['Special&Other']
+        specials = self._topLevelItems['Specials & Other']
         
         for childIndex in range(specials.childCount()):
             specials.child(childIndex).setCheckState(0, 2)
