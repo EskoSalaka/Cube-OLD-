@@ -206,8 +206,6 @@ class MagicCardsInfoParser:
         else:
             isSpecial = False
         
-        print setName, isSpecial
-        
         mtgSet = Set(setName, setCode, isSpecial) 
         
         #------------------------------------

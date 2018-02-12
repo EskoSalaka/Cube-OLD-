@@ -14,16 +14,17 @@ magiccards.info
 Cube only works with full card images and is not very useful in other
 things such as simply browsing cards or maintaining collections.
 
-<img src="git_images\Capture1.JPG" >
+<img src="git_images\Capture1.JPG">
 
 # Current status
 
-While it still is fully functional and totally usable, cube is becoming
-more or less decrepit. Currently cube is being updated from
-PyQt4 --> PyQt5 and from Python2.7 --> Python3. Maintaining and updating
-the card database will be done with MtgApi(https://docs.magicthegathering.io/#cards)
-and the database itself will be implemented with ZODB(http://www.zodb.org/en/latest/),
-which is a simple object database.
+While it still is fully functional and totally usable, Cube is becoming
+more or less decrepit. The Cube only works with Python2.7 and PyQt4 and is currently being updated
+to Python3 and PyQt5. Another problem with Cube is that the card database has very little data and it is updated
+by scraping the info from https://magiccards.info/. The database itself is just a pickled Python dictionary.
+
+In the future, maintaining and updating the card database will be done with MtgApi (https://docs.magicthegathering.io/#cards)
+and the database itself will be implemented with ZODB (http://www.zodb.org/en/latest/).
 
 The progress of the new version can be found here https://github.com/EskoSalaka/Cube
 
@@ -54,7 +55,7 @@ Installing a wheel with pip can be done in the following way
 pip install PyQt4-4.11.4-cp35-none-win_amd64.whl
 ```
 
-Be sure to choose the correct file for windows and Python
+Be sure to choose the correct windows and Python file
 
 The Cube itself can be cloned with
 
@@ -67,9 +68,11 @@ git clone https://github.com/EskoSalaka/Squares.git
 Running Main.py will run the app.
 
 Sealed decks can be generated from "Sealed Deck Generation" --> "Standard Sealed deck"
+
 by choosing sets from the dropdown menu and adding booster packs with desired amount of cards.
 
 <img src="git_images\Capture2.JPG">
+
 
 Sealed decks from cubes can be generated from "Sealed Deck Generation" --> "Sealed Deck from cube".
 The cubes can be provided as simple text files, Magic Workstation deck files or .CUBE files, which can be created with the app.
@@ -79,14 +82,13 @@ to the deck and right-clicking will bring out a menu where you can choose to sep
 casting cost. After the deck is finished, it can be saved from "File" --> "Save deck as". Statistics of the deck
 are shown automatically on the top of the card lists.
 
-<img src="git_images\Capture3.JPG" height="600" width="800">
 
 Updating the database and downloading card images can be done from "Database" --> "Update the database".
 Clicking on the "Connect" button will establish the connection to magiccards.info and automatically look for new sets.
-New sets will be marked red. Choosing whatever sets to be added(or updated) to the database and clicking on "Update sets"
+New sets will be marked red. Choosing whatever sets to be added (or updated) to the database and clicking on "Update sets"
 will update the database with the chosen data
 
-<img src="git_images\Capture3.JPG">
+<img src="git_images\Capture5.JPG">
 
 Choosing sets and clicking on "Download images" will automatically download all the card images of the set
 to the chosen folder.

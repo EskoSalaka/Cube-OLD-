@@ -44,6 +44,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.setupUi(self)
         self.configure(currentDeckSaved='', currentDeckPath='')
         self._presetBasicLands()
+        self.setWindowIcon(QtGui.QIcon('Icons\cube.png'))
 
         
         self._config.read('Settings\Settings.ini')

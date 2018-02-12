@@ -138,3 +138,5 @@ class TreeCardItem(Card, QtGui.QTreeWidgetItem):
             return 'Manasymbols\small\Enchantment.jpg'
         if 'Planeswalker' in self.type:
             return 'Manasymbols\small\Planeswalker.png'
+
+        return ''

@@ -436,7 +436,7 @@ class UpdateDialog(QtGui.QDialog):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
+        Dialog.setWindowTitle(_translate("Dialog", "Update sets and download images", None))
         self.connectButton.setText(_translate("Dialog", "Connect", None))
         self.downloadImagesButton.setText(_translate("Dialog", "Download Images", None))
         self.updateSetsButton.setText(_translate("Dialog", "Update Sets", None))
