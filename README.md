@@ -14,7 +14,7 @@ magiccards.info
 Cube only works with full card images and is not very useful in other
 things such as simply browsing cards or maintaining collections.
 
-<img src="git_images\Capture1.jpg">
+<img src="git_images\Capture1.JPG">
 
 # Current status
 
@@ -71,7 +71,7 @@ Sealed decks can be generated from "Sealed Deck Generation" --> "Standard Sealed
 
 by choosing sets from the dropdown menu and adding booster packs with desired amount of cards.
 
-<img src="git_images\Capture2.jpg">
+<img src="git_images\Capture2.JPG">
 
 
 Sealed decks from cubes can be generated from "Sealed Deck Generation" --> "Sealed Deck from cube".
@@ -88,9 +88,9 @@ Clicking on the "Connect" button will establish the connection to magiccards.inf
 New sets will be marked red. Choosing whatever sets to be added (or updated) to the database and clicking on "Update sets"
 will update the database with the chosen data
 
-<img src="git_images\Capture5.jpg">
+<img src="git_images\Capture5.JPG">
 
 Choosing sets and clicking on "Download images" will automatically download all the card images of the set
 to the chosen folder.
 
-<img src="git_images\Capture4.jpg">
+<img src="git_images\Capture4.JPG">
